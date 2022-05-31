@@ -104,7 +104,7 @@ const submitIn = (e) => {
 const getGeo = async (locationIn) => {
     try {
         let apiKeyGeo = "a35be01e648d24c61de74b1684656be9" //free api key, same for Geo and Weather APIs
-        let urlGeo = `http://api.openweathermap.org/geo/1.0/direct?q=${locationIn}&limit=3&appid=${apiKeyGeo}`;
+        let urlGeo = `https://api.openweathermap.org/geo/1.0/direct?q=${locationIn}&limit=3&appid=${apiKeyGeo}`;
         let responseGeo = await fetch(urlGeo, {mode: "cors"});
         let geoDataOut = await responseGeo.json();
         if (geoDataOut.length < 1) {
@@ -151,7 +151,7 @@ const updateDisplay = () => {
     weatherText.innerHTML = `${weatherData.weather}`;
     //Weather Image
     let weatherIcon = document.querySelector("div#weather-img img");
-    weatherIcon.src = `http://openweathermap.org/img/wn/${weatherData.weatherIcon}@2x.png`;
+    weatherIcon.src = `https://openweathermap.org/img/wn/${weatherData.weatherIcon}@2x.png`;
     //Temp Current
     let tempNowText = document.querySelector("div#temp-now p");
     tempNowText.innerHTML = `${weatherData.tempNow}`;
