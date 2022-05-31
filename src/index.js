@@ -210,12 +210,18 @@ const cleanInput = (inputValue) => {
     return inputsAll[0];
 }
 
+const init = () => {
+    document.getElementById("search-input").value = "Atlanta";
+    const eventStart = new Event('submit',{ cancelable: true });
+    document.getElementById("form").dispatchEvent(eventStart);
+    document.getElementById("search-input").value = "";
+}
+
+
+
 //Initializing page with Atlanta Data
 document.addEventListener('DOMContentLoaded', addListeners());
-document.getElementById("search-input").value = "Atlanta";
-const eventStart = new Event('submit');
-document.getElementById("form").dispatchEvent(eventStart);
-document.getElementById("search-input").value = "";
+window.addEventListener("load", init);
 
 
 
