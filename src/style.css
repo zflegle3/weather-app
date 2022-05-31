@@ -1,5 +1,4 @@
-/* @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap'); */
-/* @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap'); */
+
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
 /* font-family: 'Montserrat', sans-serif; */
 
@@ -8,14 +7,7 @@
     font-size: 10px;
     font-family: 'Montserrat', sans-serif;
 
-    /* Style 1
-    --main-bg-color: #A9E5BB;
-    --sub-dark-color: #2D1E2F;
-    --sub-light-color: #FCF6B1;
-    --alt-dark-color: #F72C25;
-    --alt-light-color: #F7B32B; */
-
-    /* Style 2  */
+    /* Style 1 */
     --main-txt-light: white;
     --main-txt-color: #4E5340;
     --sub-txt-color: #697268;
@@ -26,37 +18,6 @@
     --alt-light-color: #95A3A4;
     --sub-bg-opaque: #95a3a457;
 
-    /* Style 2 
-    --main-txt-light: white;
-    --main-bg-color: #BFD7EA;
-    --main-txt-color: black;
-    --sub-dark-color: #E0FF4F;
-    --sub-light-color: #0B3954;
-    --alt-dark-color: #FF6663;
-    --alt-light-color: #FEFFFE;
-    --sub-bg-opaque: #95a3a457; */
-
-    /* Style 2 
-    --main-txt-light: #FFFD82;
-    --main-bg-color: #1C2541;
-    --main-txt-color: 5BC0BE;
-    --sub-dark-color: #5BC0BE;
-    --sub-light-color: #0B132B;
-    --alt-dark-color: #3A506B;
-    --alt-light-color: #1C2541;
-    --sub-bg-opaque: #95a3a457;
-     */
-
-    /* Neon
-    --main-txt-light: #56E39F;
-    --main-bg-color: #1D201F;
-    --main-txt-color: black;
-    --sub-dark-color: #009DDC;
-    --sub-light-color: #032B43;
-    --alt-dark-color: #EC91D8;
-    --alt-light-color: #56E39F;
-    --sub-bg-opaque: #95a3a457;
-     */
 }
 
 /*Main Section Styles*/
