@@ -1,62 +1,259 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap'); */
+/* @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
+/* font-family: 'Montserrat', sans-serif; */
+
 * {
     box-sizing: border-box;
     font-size: 10px;
+    font-family: 'Montserrat', sans-serif;
+
+    /* Style 1
+    --main-bg-color: #A9E5BB;
+    --sub-dark-color: #2D1E2F;
+    --sub-light-color: #FCF6B1;
+    --alt-dark-color: #F72C25;
+    --alt-light-color: #F7B32B; */
+
+    /* Style 2  */
+    --main-txt-light: white;
+    --main-txt-color: #4E5340;
+    --sub-txt-color: #697268;
+
+    --main-bg-color: #B7D1DA;
+    --sub-bg-color: #E2E8DD;
+
+    --alt-light-color: #95A3A4;
+    --sub-bg-opaque: #95a3a457;
+
+    /* Style 2 
+    --main-txt-light: white;
+    --main-bg-color: #BFD7EA;
+    --main-txt-color: black;
+    --sub-dark-color: #E0FF4F;
+    --sub-light-color: #0B3954;
+    --alt-dark-color: #FF6663;
+    --alt-light-color: #FEFFFE;
+    --sub-bg-opaque: #95a3a457; */
+
+    /* Style 2 
+    --main-txt-light: #FFFD82;
+    --main-bg-color: #1C2541;
+    --main-txt-color: 5BC0BE;
+    --sub-dark-color: #5BC0BE;
+    --sub-light-color: #0B132B;
+    --alt-dark-color: #3A506B;
+    --alt-light-color: #1C2541;
+    --sub-bg-opaque: #95a3a457;
+     */
+
+    /* Neon
+    --main-txt-light: #56E39F;
+    --main-bg-color: #1D201F;
+    --main-txt-color: black;
+    --sub-dark-color: #009DDC;
+    --sub-light-color: #032B43;
+    --alt-dark-color: #EC91D8;
+    --alt-light-color: #56E39F;
+    --sub-bg-opaque: #95a3a457;
+     */
 }
 
+/*Main Section Styles*/
 body {
-    background-color: rebeccapurple;
+    position: relative;
+    background-color: var(--main-bg-color);
+    width: 100vw;
+    height: 100vh;
+}
+
+#search-bar {
+    grid-area: 1/1/2/2;
+    display: flex;
+    justify-content: flex-start;
+    position: relative;
+    height: 5rem;
+    margin: 2rem 2rem;
+
+
 }
 
 #weather-display {
-    background-color: white;
+    position: relative;
+    top: 25vh;
+    left: 25vw;
+    
+    background-color: var(--sub-bg-color);
     border-radius: .5rem;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
-    width:400px;
+    box-shadow: 0 2px 5px var(--main-bg-color);
+    padding: 1rem;
+    width:450px;
     max-width: 100%;
+    height: 300px;
     overflow: hidden;
     display: grid;
     grid-template-rows: repeat(10,1fr);
     grid-template-columns: repeat(10,1fr);
 }
 
-/*Weather Display Content Styles*/
+/*Search Bar Styles*/
 
+#form {
+    position: relative;
+    /* width: 20vw;
+    min-width: 4rem; */
+    top: 0;
+    left:0;
+}
+
+#form input {
+    background-color: var(--sub-bg-opaque);
+    color: var(--main-txt-light);
+    padding: .3rem .3rem .3rem 3rem;
+    height: 3rem;
+    width: 20vw;
+    min-width: 20rem;
+    border: none;
+    border-radius: .5rem;
+
+    font-family: inherit;
+    font-size: 1.5rem;
+
+}
+
+#form button {
+    height: 3rem;
+    width: 3rem;
+    background-color: transparent;
+    position: absolute;
+    border: none;
+    background-image: url(./images/search-icon.png);
+    background-size: contain;
+
+}
+
+#input-error {
+    color: red;
+}
+
+#form button:hover {
+    cursor: pointer;
+}
+
+#form input:focus-visible {
+    outline: none;
+}
+
+#form input::placeholder {
+    color: var(--main-txt-light)
+}
+
+
+
+/*Weather Display Content Styles*/
 #city {
-    grid-area: 1/1/3/11 ;
-    background-color: rgb(0, 255, 255);
+    grid-area: 1/1/4/9 ;
+    padding: 0 0 2rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    overflow-wrap: break-word;
+}
+
+#city p {
+    font-size: 2.5rem;
+    color: var(--main-txt-color);
 }
 
 #weather {
     grid-area: 3/1/5/8 ;
-    background-color: rgb(0, 255, 145);
+    padding: 0 0 0 3rem;
+
+}
+
+#weather p {
+    font-size: 1.75rem;
+    color: var(--sub-txt-color);
 }
 
 #weather-img {
-    grid-area: 3/8/5/11 ;
-    background-color: rgb(0, 255, 47);
+    grid-area: 1/8/5/11 ;
+    display: flex;
+    justify-content: center;
 }
 
 #temp-now {
     grid-area: 5/1/11/6 ;
-    background-color: rgb(170, 255, 0);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#temp-now p {
+    font-size: 9rem;
+    font-family: 'Montserrat', sans-serif; 
+    color: var(--main-txt-color);
+
 }
 
 #units {
     grid-area: 5/6/8/8 ;
-    background-color: rgb(251, 255, 0);
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+
+#units p {
+    grid-area: 5/6/8/8 ;
+    font-size: 2rem;
+    font-family: 'Montserrat', sans-serif; 
+    color: var(--sub-txt-color);
 }
 
 #unit-switch {
     grid-area: 8/6/11/8 ;
-    background-color: rgb(255, 204, 0);
 }
 
 #sub-info {
     grid-area: 5/8/11/11 ;
-    background-color: rgb(255, 140, 0);
     display: flex;
     flex-direction: column;
+    display: flex;
+    flex-direction: column;
+    /* margin-left: 1rem; */
+    justify-content: center;
 }
+
+#sub-info p {
+    font-size: 1.25rem;
+    color: var(--sub-txt-color);
+}
+
+#unit-toggle {
+    /* border: 1px solid var(--sub-dark-color); */
+    border: none;
+    background-color: var(--alt-light-color);
+    border-radius: .5rem;
+    padding: .5rem;
+    font-size: 1rem;
+    color: var(--sub-bg-color);
+}
+
+#unit-toggle:hover {
+    /* border: 1px solid var(--sub-dark-color); */
+    border: none;
+    background-color: var(--main-bg-color);
+    color: var(--main-txt-color);
+    cursor: pointer;
+}
+
+#unit-toggle:active {
+    border: 1px solid var(--main-txt-color);
+}
+
+
+
+
 
 
 

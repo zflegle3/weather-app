@@ -1,10 +1,9 @@
 import "./style.css"
-console.log("hello");
-
 
 const weatherData =  {
     city: "",
     weather: "",
+    weatherIcon: "",
     tempNow: "",
     tempFeel: "",
     windSpeed: "",
@@ -15,7 +14,6 @@ const weatherData =  {
     pressUnit: "",
     windUnit: "",
     switchTempUnit: function() {
-
         if (this.tempUnit === "F") {
             //to Metric
             this.tempUnit = "C";
@@ -34,7 +32,6 @@ const weatherData =  {
             this.tempFeel = Math.round(((this.tempFeel*(9/5)) + 32)*10)/10;
             this.windSpeed = Math.round((this.windSpeed/1.609344)*10)/10;
             this.pressure = Math.round((this.pressure*0.029529983071445)*100)/100;
-
         }
     },
 }
@@ -47,16 +44,14 @@ const locationData =  {
     lat: "",
 }
 
-const init = () => {
-    //initializes app
-    //adds event listeners to search image click and enter key within search 
-    addListeners();
-}
-
 const addListeners = () => {
     let formIn = document.getElementById("form");
     formIn.addEventListener("submit",submitIn);
-    //submits on enter key from input or submit button 
+    //submits on enter key from input element or submit button 
+}
+
+const addUnitListeners = () => {
+    //adds switch unit listener since it isnt necessary initially 
     let unitSwitchBtn = document.getElementById("unit-toggle");
     unitSwitchBtn.addEventListener("click",switchUnits);
 }
@@ -65,65 +60,43 @@ const addListeners = () => {
 
 const submitIn = (e) => {
     e.preventDefault();
-    // console.log(e);
     let searchInputElement = document.getElementById("search-input");
     let searchValue = cleanInput(searchInputElement.value.trim());
-    console.log(searchValue);
-    // console.log(searchLocationIn);
-    // console.log(searchLocationIn.value.trim());
-    // console.log(searchLocationIn.validity);
-    //NEED TO UPDATE VALIDITY IF API FETCH COMES BACK WITH AN ERROR OR IF NO VALUE PRESENT
 
     if (searchValue < 1) {
-        //searchLocationIn.setCustomValidity("Yo, you gotta put something here");
-        //console.log(searchLocationIn.validity);
-        //searchLocationIn.reportValidity()
         searchInputElement.classList = "search-input invalid";
         document.getElementById("input-error").innerHTML = "Please input a location.";
-        console.log("No Value Input");
+        // console.log("No Value Input");
     } else {
         searchInputElement.classList = "search-input";
         document.getElementById("input-error").innerHTML = "";
-        console.log("Valid Input");
+        // console.log("Valid Input");
         //Intiates API Call for Geo Location
         getGeo(searchValue).then((resultGeo) => {
-            //use pulled results 
-            console.log(resultGeo);
+
             locationData.city = resultGeo[0].name;
             locationData.country = resultGeo[0].country;
             locationData.state = resultGeo[0].state;
             locationData.long = resultGeo[0].lon;
             locationData.lat = resultGeo[0].lat;
-            console.log("Confirming Location Data is accessable",locationData);
         }).then(() => {
-            //console.log("how'd this run");
-            //calls function to pull weather data
-            console.log("Confirming Location Data is accessable",locationData);
             getWeather().then((resultWeather) => {
-            //store data as needed and return object with vairables 
-            // let cityIn = resultWeather.name;
-            // let typeIn = resultWeather.weather[0].description;
-            // let tempsIn = [resultWeather.main.temp,resultWeather.main.feels_like, resultWeather.main.temp_min, resultWeather.main.temp_max];
-            // let windIn = [resultWeather.wind.speed, resultWeather.wind.deg];
-            // let humidIn = resultWeather.main.humidity;
-            // let presssureIn = resultWeather.main.pressure;
     
-            weatherData.city = resultWeather.name;
-            weatherData.weather = resultWeather.weather[0].description;
-            weatherData.tempNow = Math.round((resultWeather.main.temp - 273.15)*10)/10;
-            weatherData.tempFeel = Math.round((resultWeather.main.feels_like - 273.15)*10)/10;
-            weatherData.tempUnit = "C";
-            weatherData.pressUnit = "hPa";
-            weatherData.windUnit = "kph";
-            weatherData.windSpeed = resultWeather.wind.speed;
-            weatherData.windDirection = resultWeather.wind.deg;
-            weatherData.humidity = resultWeather.main.humidity;
-            weatherData.pressure = resultWeather.main.pressure;
-            console.log(weatherData);
-            console.log(locationData);
-            updateDisplay();
-        });
-
+                weatherData.city = resultWeather.name;
+                weatherData.weather = resultWeather.weather[0].description;
+                weatherData.weatherIcon = resultWeather.weather[0].icon;
+                weatherData.tempNow = Math.round((resultWeather.main.temp - 273.15)*10)/10;
+                weatherData.tempFeel = Math.round((resultWeather.main.feels_like - 273.15)*10)/10;
+                weatherData.tempUnit = "C";
+                weatherData.pressUnit = "hPa";
+                weatherData.windUnit = "kph";
+                weatherData.windSpeed = resultWeather.wind.speed;
+                weatherData.windDirection = resultWeather.wind.deg;
+                weatherData.humidity = resultWeather.main.humidity;
+                weatherData.pressure = resultWeather.main.pressure;
+                addUnitListeners();
+                updateDisplay();
+            });
         })
     }
 }
@@ -134,7 +107,6 @@ const getGeo = async (locationIn) => {
         let urlGeo = `http://api.openweathermap.org/geo/1.0/direct?q=${locationIn}&limit=3&appid=${apiKeyGeo}`;
         let responseGeo = await fetch(urlGeo, {mode: "cors"});
         let geoDataOut = await responseGeo.json();
-        //let dataOut = storeWeatherData(weatherData);
         if (geoDataOut.length < 1) {
             throw "The location entered was not found. Please try again.";
         }
@@ -146,7 +118,6 @@ const getGeo = async (locationIn) => {
     }
 }
 
-
 const getWeather = async () => {
     try {
         let apiKey = "a35be01e648d24c61de74b1684656be9" //free api key
@@ -154,9 +125,13 @@ const getWeather = async () => {
         let response = await fetch(URL, {mode: "cors"});
         let weatherDataOut = await response.json();
         //ADD error catching here to throw error if issue pulling weather data
-        console.log(weatherDataOut);
+        if (weatherDataOut.length < 1) {
+            throw "The weather for that location was not found. Please try again.";
+        }
         return weatherDataOut;
     } catch (err) {
+        document.getElementById("search-input").classList = "search-input invalid";
+        document.getElementById("input-error").innerHTML = `${err}`;
         console.error(err);
     }
 }
@@ -164,18 +139,25 @@ const getWeather = async () => {
 const updateDisplay = () => {
     console.log
     //Location
-    let locationText = document.querySelector("div#city p");
-    locationText.innerHTML = `${locationData.city}, ${locationData.state}, ${locationData.country}`;
+    if (locationData.state === undefined) {
+        let locationText = document.querySelector("div#city p");
+        locationText.innerHTML = `${locationData.city}, ${locationData.country}`;
+    } else {
+        let locationText = document.querySelector("div#city p");
+        locationText.innerHTML = `${locationData.city}, ${locationData.state}, ${locationData.country}`;
+    }
     //Weather Description
     let weatherText = document.querySelector("div#weather p");
     weatherText.innerHTML = `${weatherData.weather}`;
-    //Logo??
+    //Weather Image
+    let weatherIcon = document.querySelector("div#weather-img img");
+    weatherIcon.src = `http://openweathermap.org/img/wn/${weatherData.weatherIcon}@2x.png`;
     //Temp Current
     let tempNowText = document.querySelector("div#temp-now p");
     tempNowText.innerHTML = `${weatherData.tempNow}`;
     //Units
     let unitText = document.querySelector("div#units p");
-    unitText.innerHTML = `${weatherData.tempUnit}`;
+    unitText.innerHTML = `°${weatherData.tempUnit}`;
     //Temp Feels Like
     let tempFeelText = document.querySelector("div#temp-feel p");
     tempFeelText.innerHTML = `Feels Like: ${weatherData.tempFeel} °${weatherData.tempUnit}`;
@@ -191,24 +173,24 @@ const updateDisplay = () => {
 }
 
 const returnDirection = (windDegrees) => {
-    if (67.5 > windDegrees >= 22.5) {
+    if (67.5 > windDegrees && windDegrees >= 22.5) {
         return "NE"
-    } else if (112.5 > windDegrees >= 67.5) {
+    } else if (112.5 > windDegrees && windDegrees >= 67.5) {
         return "E"
     }
-    else if (157.5 > windDegrees >= 112.5) {
+    else if (157.5 > windDegrees && windDegrees >= 112.5) {
         return "SE"
     }
-    else if (202.5 > windDegrees >= 157.5) {
+    else if (202.5 > windDegrees && windDegrees >= 157.5) {
         return "S"
     }
-    else if (247.5 > windDegrees >= 202.5) {
+    else if (247.5 > windDegrees && windDegrees >= 202.5) {
         return "SW"
     }
-    else if (295.5 > windDegrees >= 247.5) {
+    else if (295.5 > windDegrees && windDegrees >= 247.5) {
         return "W"
     }
-    else if (337.5 > windDegrees >= 295.5) {
+    else if (337.5 > windDegrees && windDegrees >= 295.5) {
         return "NW"
     }
     else {
@@ -216,54 +198,27 @@ const returnDirection = (windDegrees) => {
     }
 }
 
-
 const switchUnits = () => {
     weatherData.switchTempUnit();
     updateDisplay();
-    console.log(weatherData);
 }
 
-
-// function createWeatherData(cityId) {
-//     //get data from fetch
-// }
-
-
-
-// const getID = (locationName) => {
-//     //function to search location by name and return the ID 
-//     //per the location pulled from 
-//     let atlId = "4180439";
-//     return atlId
-// }
-
-
-
-// const validateLocation = () => {
-//     let searchLocationIn = document.getElementById("search-input");
-//     console.log(searchLocationIn);
-//     console.log(searchLocationIn.value);
-//     console.log(searchLocationIn.validity);
-//     let geoObj = getGeo(searchLocationIn).then((result) => {
-//         let cityName = result.name;
-//         let cityLat = result.lat;
-//         let cityLon = result.lat;
-//         let cityCountry = result.country;
-
-//     });
-// }
 const cleanInput = (inputValue) => {
-    //FUNCTION TO SANITIZE USER INPUT FOR API SEARCH
-    //UPDATE LATER TO REFLECT MORE COMPREHENSIVE INPUTS FROM USER
-    //FOR NOW SIMPLY SPLITTING OUT IN CASE OF COMMA WHICH CAUSES ERROR 
+    //Function to sanitize unser input for Api Location search
+    //For now simply splitting out in case of comma input
     let inputsAll = inputValue.split(",");
     return inputsAll[0];
 }
 
+//Initializing page with Atlanta Data
+document.addEventListener('DOMContentLoaded', addListeners());
+document.getElementById("search-input").value = "Atlanta";
+const eventStart = new Event('submit');
+document.getElementById("form").dispatchEvent(eventStart);
+document.getElementById("search-input").value = "";
 
 
-//console.log(weatherData);
-document.addEventListener('DOMContentLoaded', init());
+
 
 
 
