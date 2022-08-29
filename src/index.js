@@ -62,7 +62,7 @@ const submitIn = (e) => {
     let searchInputElement = document.getElementById("search-input");
     let searchValue = cleanInput(searchInputElement.value.trim());
 
-    if (searchValue < 1) {
+    if (searchValue[0] < 1) {
         searchInputElement.classList = "search-input invalid";
         document.getElementById("input-error").innerHTML = "Please input a location.";
         // console.log("No Value Input");
@@ -103,11 +103,12 @@ const submitIn = (e) => {
 const getGeo = async (locationIn) => {
     try {
         let apiKeyGeo = "a35be01e648d24c61de74b1684656be9" //free api key, same for Geo and Weather APIs
-        let urlGeo = `https://api.openweathermap.org/geo/1.0/direct?q=${locationIn}&limit=3&appid=${apiKeyGeo}`;
+        let urlGeo = `https://api.openweathermap.org/geo/1.0/direct?q=${locationIn[0]}&limit=3&appid=${apiKeyGeo}`;
         let responseGeo = await fetch(urlGeo, {mode: "cors"});
         let geoDataOut = await responseGeo.json();
+        // console.log(geoDataOut);
         if (geoDataOut.length < 1) {
-            throw "The location entered was not found. Please try again.";
+            throw "That location was not found. Please try again.";
         }
         return geoDataOut;
     } catch (err) {
@@ -136,7 +137,6 @@ const getWeather = async () => {
 }
 
 const updateDisplay = () => {
-    console.log
     //Location
     if (locationData.state === undefined) {
         let locationText = document.querySelector("div#city p");
@@ -206,8 +206,8 @@ const cleanInput = (inputValue) => {
     //Function to sanitize unser input for Api Location search
     //For now simply splitting out in case of comma input
     let inputsAll = inputValue.split(",");
-    console.log(inputsAll);
-    return inputsAll[0];
+    // console.log(inputsAll);
+    return inputsAll;
 }
 
 const init = () => {
