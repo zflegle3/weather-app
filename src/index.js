@@ -57,7 +57,6 @@ const addUnitListeners = () => {
 }
 
 
-
 const submitIn = (e) => {
     e.preventDefault();
     let searchInputElement = document.getElementById("search-input");
@@ -71,9 +70,9 @@ const submitIn = (e) => {
         searchInputElement.classList = "search-input";
         document.getElementById("input-error").innerHTML = "";
         // console.log("Valid Input");
+
         //Intiates API Call for Geo Location
         getGeo(searchValue).then((resultGeo) => {
-
             locationData.city = resultGeo[0].name;
             locationData.country = resultGeo[0].country;
             locationData.state = resultGeo[0].state;
@@ -207,6 +206,7 @@ const cleanInput = (inputValue) => {
     //Function to sanitize unser input for Api Location search
     //For now simply splitting out in case of comma input
     let inputsAll = inputValue.split(",");
+    console.log(inputsAll);
     return inputsAll[0];
 }
 
