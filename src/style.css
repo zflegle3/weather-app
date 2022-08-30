@@ -6,18 +6,6 @@
     box-sizing: border-box;
     font-size: 10px;
     font-family: 'Montserrat', sans-serif;
-
-    /* Style 1 */
-    --main-txt-light: white;
-    --main-txt-color: #4E5340;
-    --sub-txt-color: #697268;
-
-    --main-bg-color: #B7D1DA;
-    --sub-bg-color: #E2E8DD;
-
-    --alt-light-color: #95A3A4;
-    --sub-bg-opaque: #95a3a457;
-
 }
 
 /*Main Section Styles*/
@@ -29,15 +17,31 @@ body {
     display: flex;
     flex-direction: column;
     margin: 0;
+
+    /* Light Mode */
+    --main-txt-light: white;
+    --main-txt-color: #4E5340;
+    --sub-txt-color: #697268;
+
+    --main-bg-color: #B7D1DA;
+    --sub-bg-color: #E2E8DD;
+
+    --alt-light-color: #95A3A4;
+    --sub-bg-opaque: rgba(149, 163, 164, 0.65);
 }
 
 #search-bar {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
+    align-items: center;
     position: relative;
     height: 5rem;
     margin: 2rem 2rem;
+}
+
+#color-toggle {
+    margin-left: 1rem;
 }
 
 #weather-content {
@@ -70,6 +74,9 @@ body {
     position: relative;
     top: 0;
     left:0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }
 
 #form input {
@@ -84,7 +91,6 @@ body {
 
     font-family: inherit;
     font-size: 1.5rem;
-
 }
 
 #form button {
@@ -100,6 +106,10 @@ body {
 
 #input-error {
     color: red;
+    font-size: 1.2rem;
+    position: absolute;
+    top: 3rem;
+    left: 1rem;
 }
 
 #form button:hover {
@@ -220,7 +230,55 @@ body {
 }
 
 
+/*Darkmode Toggle Styles*/
 
+.dark-mode {
+    /* Dark Mode */
+    --main-txt-light: white;
+    --main-txt-color: #F5CB5C;
+    --sub-txt-color: #E8EDDF;
+
+    --main-bg-color: #16425B;
+    --sub-bg-color: #333533;
+
+    --alt-light-color: #95A3A4;
+    --sub-bg-opaque: rgba(149, 163, 164, 0.65);
+}
+
+.checkbox {
+    opacity: 0;
+    position: absolute;
+  }
+  
+.label {
+    width: 3rem;
+    height: 1.5rem;
+    background-color:#111;
+    display: flex;
+    border-radius:50px;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px;
+    position: relative;
+    transform: scale(1.5);
+    margin-left: 1.5rem;
+}
+  
+.ball {
+    width: 1rem;
+    height: 1rem;
+    background-color: white;
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    border-radius: 50%;
+    transition: transform 0.2s linear;
+}
+
+.checkbox:checked + .label .ball{
+    transform: translateX(1.5rem);
+}
+  
 
 
 

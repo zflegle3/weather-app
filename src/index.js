@@ -46,7 +46,9 @@ const locationData =  {
 
 const addListeners = () => {
     let formIn = document.getElementById("form");
+    let colorToggle = document.getElementById("checkbox");
     formIn.addEventListener("submit",submitIn);
+    colorToggle.addEventListener("change",toggleColorMode);
     //submits on enter key from input element or submit button 
 }
 
@@ -56,6 +58,12 @@ const addUnitListeners = () => {
     unitSwitchBtn.addEventListener("click",switchUnits);
 }
 
+const toggleColorMode = () => {
+    console.log("Change color mode");
+    let docBody = document.querySelector("body");
+    docBody.classList.toggle("dark-mode");
+
+}
 
 const submitIn = (e) => {
     e.preventDefault();
