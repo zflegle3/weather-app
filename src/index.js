@@ -1,5 +1,8 @@
 import "./style.css"
 
+
+
+//Variables
 const weatherData =  {
     city: "",
     weather: "",
@@ -44,51 +47,66 @@ const locationData =  {
     lat: "",
 }
 
+
+
+//Functions
+const init = () => {
+    //Initializing page with Atlanta GA weather data
+    document.getElementById("search-input").value = "Atlanta";
+    const eventStart = new Event('submit',{cancelable: true });
+    document.getElementById("form").dispatchEvent(eventStart);
+    document.getElementById("search-input").value = "";
+};
+
 const addListeners = () => {
+    //Adding event listeners for search bar and color toggle 
     let formIn = document.getElementById("form");
     let colorToggle = document.getElementById("checkbox");
     formIn.addEventListener("submit",submitIn);
-    colorToggle.addEventListener("change",toggleColorMode);
     //submits on enter key from input element or submit button 
-}
+    colorToggle.addEventListener("change",toggleColorMode);
+};
 
 const addUnitListeners = () => {
-    //adds switch unit listener since it isnt necessary initially 
+    //adds switch unit event listener since functionality isnt necessary initially 
     let unitSwitchBtn = document.getElementById("unit-toggle");
     unitSwitchBtn.addEventListener("click",switchUnits);
-}
+};
 
 const toggleColorMode = () => {
-    console.log("Change color mode");
+    //toggles class of body element to determine color scheme of display
     let docBody = document.querySelector("body");
     docBody.classList.toggle("dark-mode");
 
-}
+};
 
 const submitIn = (e) => {
+    //handles functionality of user input and display on page 
     e.preventDefault();
     let searchInputElement = document.getElementById("search-input");
     let searchValue = cleanInput(searchInputElement.value.trim());
 
     if (searchValue[0] < 1) {
+        //error handling - no search value error handling
         searchInputElement.classList = "search-input invalid";
         document.getElementById("input-error").innerHTML = "Please input a location.";
-        // console.log("No Value Input");
     } else {
+        //error handling - reset
         searchInputElement.classList = "search-input";
         document.getElementById("input-error").innerHTML = "";
-        // console.log("Valid Input");
 
-        //Intiates API Call for Geo Location
+        //Intiates API Call for Geo Location Data
         getGeo(searchValue).then((resultGeo) => {
-            locationData.city = resultGeo[0].name;
-            locationData.country = resultGeo[0].country;
-            locationData.state = resultGeo[0].state;
-            locationData.long = resultGeo[0].lon;
-            locationData.lat = resultGeo[0].lat;
+            if (resultGeo) {
+                locationData.city = resultGeo[0].name;
+                locationData.country = resultGeo[0].country;
+                locationData.state = resultGeo[0].state;
+                locationData.long = resultGeo[0].lon;
+                locationData.lat = resultGeo[0].lat;
+            }
         }).then(() => {
+            //Intiates API Call for Weather Data per Geo Data
             getWeather().then((resultWeather) => {
-    
                 weatherData.city = resultWeather.name;
                 weatherData.weather = resultWeather.weather[0].description;
                 weatherData.weatherIcon = resultWeather.weather[0].icon;
@@ -105,8 +123,8 @@ const submitIn = (e) => {
                 updateDisplay();
             });
         })
-    }
-}
+    };
+};
 
 const getGeo = async (locationIn) => {
     try {
@@ -114,17 +132,16 @@ const getGeo = async (locationIn) => {
         let urlGeo = `https://api.openweathermap.org/geo/1.0/direct?q=${locationIn[0]}&limit=3&appid=${apiKeyGeo}`;
         let responseGeo = await fetch(urlGeo, {mode: "cors"});
         let geoDataOut = await responseGeo.json();
-        // console.log(geoDataOut);
+        //error handling - no location data from API
         if (geoDataOut.length < 1) {
             throw "That location was not found. Please try again.";
-        }
+        };
         return geoDataOut;
     } catch (err) {
         document.getElementById("search-input").classList = "search-input invalid";
         document.getElementById("input-error").innerHTML = `${err}`;
-        console.error(err);
-    }
-}
+    };
+};
 
 const getWeather = async () => {
     try {
@@ -132,7 +149,7 @@ const getWeather = async () => {
         let URL =`https://api.openweathermap.org/data/2.5/weather?lat=${locationData.lat}&lon=${locationData.long}&appid=${apiKey}`;
         let response = await fetch(URL, {mode: "cors"});
         let weatherDataOut = await response.json();
-        //ADD error catching here to throw error if issue pulling weather data
+        //error handling - no weather data from API
         if (weatherDataOut.length < 1) {
             throw "The weather for that location was not found. Please try again.";
         }
@@ -140,9 +157,8 @@ const getWeather = async () => {
     } catch (err) {
         document.getElementById("search-input").classList = "search-input invalid";
         document.getElementById("input-error").innerHTML = `${err}`;
-        console.error(err);
-    }
-}
+    };
+};
 
 const updateDisplay = () => {
     //Location
@@ -152,7 +168,7 @@ const updateDisplay = () => {
     } else {
         let locationText = document.querySelector("div#city p");
         locationText.innerHTML = `${locationData.city}, ${locationData.state}, ${locationData.country}`;
-    }
+    };
     //Weather Description
     let weatherText = document.querySelector("div#weather p");
     weatherText.innerHTML = `${weatherData.weather}`;
@@ -177,57 +193,47 @@ const updateDisplay = () => {
     //Pressure
     let pressureText = document.querySelector("div#pressure p");
     pressureText.innerHTML = `Pressure: ${weatherData.pressure}${weatherData.pressUnit}`;
-}
+};
 
 const returnDirection = (windDegrees) => {
     if (67.5 > windDegrees && windDegrees >= 22.5) {
-        return "NE"
+        return "NE";
     } else if (112.5 > windDegrees && windDegrees >= 67.5) {
-        return "E"
+        return "E";
     }
     else if (157.5 > windDegrees && windDegrees >= 112.5) {
-        return "SE"
+        return "SE";
     }
     else if (202.5 > windDegrees && windDegrees >= 157.5) {
-        return "S"
+        return "S";
     }
     else if (247.5 > windDegrees && windDegrees >= 202.5) {
-        return "SW"
+        return "SW";
     }
     else if (295.5 > windDegrees && windDegrees >= 247.5) {
-        return "W"
+        return "W";
     }
     else if (337.5 > windDegrees && windDegrees >= 295.5) {
-        return "NW"
+        return "NW";
     }
     else {
-        return "N"
+        return "N";
     }
-}
+};
 
 const switchUnits = () => {
     weatherData.switchTempUnit();
     updateDisplay();
-}
+};
 
 const cleanInput = (inputValue) => {
-    //Function to sanitize unser input for Api Location search
+    //Function to handle user input for API Geo search
     //For now simply splitting out in case of comma input
     let inputsAll = inputValue.split(",");
-    // console.log(inputsAll);
     return inputsAll;
-}
+};
 
-const init = () => {
-    document.getElementById("search-input").value = "Atlanta";
-    const eventStart = new Event('submit',{ cancelable: true });
-    document.getElementById("form").dispatchEvent(eventStart);
-    document.getElementById("search-input").value = "";
-}
-
-
-
-//Initializing page with Atlanta Data
+//Initializing page with Weather Data and UI controls
 document.addEventListener('DOMContentLoaded', addListeners());
 window.addEventListener("load", init);
 
