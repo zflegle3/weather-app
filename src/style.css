@@ -27,7 +27,7 @@ body {
     --sub-bg-color: #E2E8DD;
 
     --alt-light-color: #95A3A4;
-    --sub-bg-opaque: rgba(149, 163, 164, 0.65);
+    --sub-bg-opaque: rgba(0, 0, 0, 0.65);
 }
 
 #search-bar {
@@ -58,7 +58,7 @@ body {
     position: relative;
     background-color: var(--sub-bg-color);
     border-radius: .5rem;
-    box-shadow: 0 2px 5px var(--main-bg-color);
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.35);
     padding: 2rem;
     height: 300px;
     overflow: hidden;
@@ -210,9 +210,9 @@ body {
 
 #unit-toggle {
     border: none;
-    background-color: var(--alt-light-color);
+    background-color: var(--sub-txt-color);
     border-radius: .5rem;
-    padding: 0.5rem 1rem 0.5rem 1rem;
+    padding: 0.5rem 2rem 0.5rem 2rem;
     font-size: 1.2rem;
     color: var(--sub-bg-color);
 }
@@ -235,12 +235,10 @@ body {
 .dark-mode {
     /* Dark Mode */
     --main-txt-light: white;
-    --main-txt-color: #F5CB5C;
-    --sub-txt-color: #E8EDDF;
-
-    --main-bg-color: #16425B;
+    --main-txt-color: #ECB365;
+    --sub-txt-color: #8D99AE;
+    --main-bg-color: #04293A;
     --sub-bg-color: #333533;
-
     --alt-light-color: #95A3A4;
     --sub-bg-opaque: rgba(149, 163, 164, 0.65);
 }
