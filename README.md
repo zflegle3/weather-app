@@ -4,7 +4,7 @@
 
 ## Summary
 
-This project was built as part of The Odin Project JavaScript curriculum in order to practice asynchronous code and fetching data from APIs. The application, built with JavaScript, HTML, CSS, and Webpack, uses OpenWeather API to request and display current weather data based on the location searched. 
+This project was built as part of The Odin Project JavaScript curriculum in order to practice asynchronous code, fetching data from APIs, and OOP principles. The application, built with JavaScript, HTML, CSS, and Webpack, uses OpenWeather API to request and display current weather data based on the location searched. 
 
 ## Features
 * Displays current weather info and image per location searched
