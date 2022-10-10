@@ -1,4 +1,4 @@
-# Weather App
+# Live Weather Widget
 
 [Live Demo Here!](https://zflegle3.github.io/weather-app/)
 
