@@ -4,12 +4,18 @@
 
 ## Summary
 
-This project was built as part of The Odin Project JavaScript curriculum in order to practice asynchronous code, fetching data from APIs, and OOP (SOLID) principles. The application, built with JavaScript, HTML, CSS, and Webpack, uses OpenWeather API to request and display current weather data based on the location searched. 
+This project was built as part of The Odin Project JavaScript curriculum in order to practice asynchronous code, fetching data from APIs, and OOP (SOLID) principles. OpenWeather API is used to request and display current weather data based on the location searched. 
 
 ## Features
 * Displays current weather info and image per location searched
-* Search for specific locations by using the search bar located in the top left of the page
-* Change units between Metric and Imperial by clicking the "switch units" button
-* Change color display by clicking the slider located next to the search bar
+* Switches between metric and imperial units by clicking the "switch units" button
+* Changes color display by clicking the slider located next to the search bar
+
+## Technologies
+* JavaScript
+* HTML
+* CSS
+* Webpack
+* OpenWeather API
 
 ![demo image](https://raw.githubusercontent.com/zflegle3/weather-app/main/src/images/weather-app-demo.png)
