@@ -183,16 +183,16 @@ const updateDisplay = () => {
     unitText.innerHTML = `°${weatherData.tempUnit}`;
     //Temp Feels Like
     let tempFeelText = document.querySelector("div#temp-feel p");
-    tempFeelText.innerHTML = `Feels Like: ${weatherData.tempFeel} °${weatherData.tempUnit}`;
+    tempFeelText.innerHTML = `${weatherData.tempFeel} °${weatherData.tempUnit}`;
     //Wind
     let windText = document.querySelector("div#wind p");
-    windText.innerHTML = `Wind: ${weatherData.windSpeed}${weatherData.windUnit} ${returnDirection(weatherData.windDirection)}`;
+    windText.innerHTML = `${weatherData.windSpeed}${weatherData.windUnit} ${returnDirection(weatherData.windDirection)}`;
     //Humidity
     let humidText = document.querySelector("div#humidity p");
-    humidText.innerHTML = `Humidity: ${weatherData.humidity}%`;
+    humidText.innerHTML = `${weatherData.humidity}%`;
     //Pressure
     let pressureText = document.querySelector("div#pressure p");
-    pressureText.innerHTML = `Pressure: ${weatherData.pressure}${weatherData.pressUnit}`;
+    pressureText.innerHTML = `${weatherData.pressure}${weatherData.pressUnit}`;
 };
 
 const returnDirection = (windDegrees) => {

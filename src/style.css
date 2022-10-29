@@ -1,19 +1,66 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
 
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap'); */
 /* font-family: 'Montserrat', sans-serif; */
 
 * {
     box-sizing: border-box;
     font-size: 10px;
-    font-family: 'Montserrat', sans-serif;
+    /* font-family: 'Montserrat', sans-serif; */
+    font-family: 'Lora', serif;
+    /* font-family: 'Noto Sans KR', sans-serif; */
 }
 
 
-/*Main Section Styles*/
-
+/*Main Document Styles*/
 body {
     position: relative;
     background-color: var(--main-bg-color);
+    background-image: url("./images/mobile/erol-ahmed-5nFU8l0RDiY-unsplash.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
     width: 100vw;
     height: 100vh;
     display: flex;
@@ -22,74 +69,58 @@ body {
 
     /* Light Mode */
     --main-txt-light: white;
-    --main-txt-color: #4E5340;
-    --sub-txt-color: #697268;
+    --main-txt-color: #101B2D;
+    --sub-txt-color: #243056;
     --main-bg-color: #B7D1DA;
     --sub-bg-color: #E2E8DD;
     --alt-light-color: #95A3A4;
     --sub-bg-opaque: rgba(0, 0, 0, 0.65);
+
+    --container-bg-sub: rgba(255, 255, 255, 0.15);
+    transition: 0.3s;
 }
 
-#search-bar {
+
+/*Search Bar Styles*/
+.search-bar {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
     position: relative;
-    height: 5rem;
-    margin: 2rem 2rem;
+    /* height: 5rem; */
+    /* margin: 2rem 2rem; */
+    width: 100%;
+    padding: 1rem;
 }
 
-#color-toggle {
-    margin-left: 1rem;
-}
-
-#weather-content {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-}
-
-#weather-display {
-    position: relative;
-    background-color: var(--sub-bg-color);
-    border-radius: .5rem;
-    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.35);
-    padding: 2rem;
-    height: 300px;
-    overflow: hidden;
-    display: grid;
-    grid-template-rows: repeat(10,1fr);
-    grid-template-columns: repeat(10,1fr);
-}
-
-
-/*Search Bar Styles*/
-
-#form {
+.form {
+    flex-grow: 1;
     position: relative;
     top: 0;
     left:0;
     display: flex;
     flex-direction: row;
     align-items: center;
+    /* padding: 1rem; */
 }
 
-#form input {
+.form input {
     background-color: var(--sub-bg-opaque);
     color: var(--main-txt-light);
-    padding: 1rem .5rem 1rem 3.5rem;
-    width: 20vw;
-    min-width: 20rem;
+    padding: 0.5rem 1rem 0.5rem 4rem;
+    width: 100%;
+    /* min-width: 20rem; */
     border: none;
     border-radius: .5rem;
-    font-family: inherit;
-    font-size: 1.5rem;
+    font-size: 2rem;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 300;
+    letter-spacing: 0.1rem;
+
 }
 
-#form button {
+.form button {
     height: 3rem;
     width: 3rem;
     background-color: transparent;
@@ -99,35 +130,81 @@ body {
     background-size: contain;
     background-repeat: no-repeat;
     left: 0.5rem;
+    cursor: pointer;
 
 }
 
 #input-error {
     color: red;
+    font-family: 'Noto Sans KR', sans-serif;
     font-size: 1.2rem;
     position: absolute;
-    top: 3rem;
+    bottom: -2rem;
     left: 1rem;
 }
 
-#form button:hover {
-    cursor: pointer;
-}
-
-#form input:focus-visible {
+.form input:focus-visible {
     outline: none;
 }
 
-#form input::placeholder {
+.form input::placeholder {
     color: var(--main-txt-light);
 }
+
+
+
+
+/*Weather Component Display Styles*/
+
+.weather-content {
+    padding: 2.5rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.weather-display {
+    position: relative;
+    /* background-color: var(--sub-bg-color); */
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.2));
+    backdrop-filter: blur(10px);
+    border-radius: 2rem;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 8px 32px 0 rgb(0 0 0 / 37%);
+    padding: 2rem;
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.header {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.main-content {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+}
+
+
 
 
 /*Weather Display Content Styles*/
 
 #city {
     grid-area: 1/1/4/9 ;
-    padding: 0 0 2rem 0rem;
+    /* padding: 0 0 2rem 0rem; */
     display: flex;
     align-items: center;
     justify-content: flex-start;
@@ -135,50 +212,60 @@ body {
 }
 
 #city p {
-    font-size: 2.5rem;
+    font-size: 3rem;
+    font-family: 'Lora', serif;
+    font-weight: 400;
+    font-style: italic;
     color: var(--main-txt-color);
 }
 
 #weather {
-    grid-area: 3/1/5/8 ;
-    padding: 0 0 0 1.5rem;
+    /* grid-area: 3/1/5/8 ; */
+    padding: 1rem 1.5rem 0rem 1.5rem;
 }
 
 #weather p {
-    font-size: 1.75rem;
+    font-size: 2rem;
+    font-family: 'Lora', serif;
+    font-weight: 400;
+    font-style: italic;
     color: var(--sub-txt-color);
 }
 
 #weather-img {
-    grid-area: 1/8/5/11 ;
+    /* grid-area: 1/8/5/11 ; */
     display: flex;
     justify-content: center;
 }
 
 #temp-now {
-    grid-area: 5/1/10/7 ;
+    /* grid-area: 5/1/10/7 ; */
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 #temp-now p {
-    font-size: 9rem;
+    font-size: 6rem;
     font-family: 'Montserrat', sans-serif; 
     color: var(--main-txt-color);
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 400;
 }
 
 #units {
-    grid-area: 5/7/8/8 ;
+    /* grid-area: 5/7/8/8 ; */
     display: flex;
-    justify-content: start;
+    justify-content: flex-start;
     align-items: center;
+
 }
 
 #units p {
     font-size: 2rem;
-    font-family: 'Montserrat', sans-serif; 
     color: var(--main-txt-color);
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 400;
 }
 
 #unit-switch {
@@ -189,41 +276,75 @@ body {
 }
 
 #sub-info {
-    grid-area: 5/8/11/11 ;
+    width: 100%;
+    /* grid-area: 5/8/11/11 ; */
     display: flex;
     flex-direction: column;
     display: flex;
     flex-direction: column;
     /* margin-left: 1rem; */
     justify-content: center;
+    background-color: var(--container-bg-sub);
+    box-shadow: inset 3px 3px 5px rgba(0, 0, 0, 0.35);
+    padding: 1.5rem;
+    border-radius: 1.5rem;
 }
 
-#sub-info p {
-    font-size: 1.25rem;
+#sub-info > div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#sub-info p, #sub-info h2 {
+    /* font-size: 1.25rem; */
+    padding: 0.5rem;
+    font-size: 1.5rem;
     color: var(--sub-txt-color);
-    padding-left: 1rem;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 400;
+}
+
+#unit-switch {
+    padding-top: 2rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 #unit-toggle {
-    border: none;
-    background-color: var(--sub-txt-color);
-    border-radius: .5rem;
-    padding: 0.5rem 2rem 0.5rem 2rem;
+    border: 1px solid var(--sub-txt-color);
+    /* background-color: transparent; */
+    background-color: var(--container-bg-sub);
+    border-radius: 1rem;
+
     font-size: 1.2rem;
-    color: var(--sub-bg-color);
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 400;
+
+    color: var(--sub-txt-color);
+    cursor: pointer;
+    padding: 0.5rem 2rem;
+    transition: 0.3s;
 }
 
 #unit-toggle:hover {
+    background-color: var(--sub-txt-color);
+    color: var(--main-txt-light);
+
     /* border: 1px solid var(--sub-dark-color); */
-    border: none;
+    /* border: none;
     background-color: var(--main-bg-color);
     color: var(--main-txt-color);
     cursor: pointer;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.35);
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.35); */
+    transition: 0.3s;
 }
 
 #unit-toggle:active {
-    border: 1px solid var(--main-txt-color);
+    /* border: 1px solid var(--main-txt-color); */
 }
 
 
@@ -238,29 +359,42 @@ body {
     --sub-bg-color: #333533;
     --alt-light-color: #95A3A4;
     --sub-bg-opaque: rgba(149, 163, 164, 0.65);
+    --container-bg-sub: rgba(0, 0, 0, 0.15);
+    transition: 0.3s;
+}
+
+body.dark-mode {
+    background-image: url("./images/mobile/lerone-pieters-j57b5V7_RJw-unsplash.jpg");
+}
+
+
+/* Color Theme Toggle */
+.toggle-container {
+    padding-left: 1rem;
 }
 
 .checkbox {
     opacity: 0;
     position: absolute;
-  }
+}
   
 .label {
-    width: 3rem;
-    height: 1.4rem;
+    width: 5rem;
+    height: 2.4rem;
     background-color: var(--sub-bg-opaque);
     display: flex;
     border-radius:50px;
     align-items: center;
     justify-content: space-between;
     position: relative;
-    transform: scale(1.5);
-    margin-left: 1.5rem;
+    /* padding: 0rem 1rem; */
+    /* transform: scale(1.5); */
+    /* margin-left: 1.5rem; */
 }
   
 .ball {
-    width: 1rem;
-    height: 1rem;
+    width: 2rem;
+    height: 2rem;
     background-color: white;
     position: absolute;
     top: 2px;
@@ -270,9 +404,11 @@ body {
 }
 
 .checkbox:checked + .label .ball{
-    transform: translateX(1.6rem);
+    transform: translateX(2.6rem);
 }
   
+
+
 
 
 
