@@ -18,4 +18,4 @@ This project was built as part of The Odin Project JavaScript curriculum in orde
 * Webpack
 * OpenWeather API
 
-![demo image](https://raw.githubusercontent.com/zflegle3/weather-app/main/src/images/weather-app-demo.png)
+![demo image](https://raw.githubusercontent.com/zflegle3/weather-app/main/src/images/demo1.png)
