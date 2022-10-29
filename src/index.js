@@ -193,6 +193,13 @@ const updateDisplay = () => {
     //Pressure
     let pressureText = document.querySelector("div#pressure p");
     pressureText.innerHTML = `${weatherData.pressure}${weatherData.pressUnit}`;
+    let displayComponent = document.querySelector(".weather-display");
+    console.log(displayComponent);
+    //On Load hide display until values populated
+    if (!displayComponent.classList.contains("visable")) {
+        console.log("show");
+        displayComponent.classList.add("visable");
+    }
 };
 
 const returnDirection = (windDegrees) => {
