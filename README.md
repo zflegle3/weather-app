@@ -8,8 +8,8 @@ This project was built as part of The Odin Project JavaScript curriculum in orde
 
 ## Features
 * Displays current weather info and image per location searched
-* Switches between metric and imperial units by clicking the "switch units" button
-* Changes color display by clicking the slider located next to the search bar
+* Alternates between metric and imperial units by clicking the "switch units" button
+* Changes color theme by clicking the slider
 
 ## Technologies
 * JavaScript
