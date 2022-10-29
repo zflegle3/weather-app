@@ -10,9 +10,17 @@
     <title>Weather Web App - Odin Project</title>
     <script src="web-app.js" defer></script>
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital@0;1&display=swap" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400&display=swap" rel="stylesheet">
+
 </head>
 <body>
-    <div id="search-bar">
+    <div class="search-bar">
 
         <form action="" id="form" class="form">
             <button class="submit-btn"></button>
@@ -20,7 +28,7 @@
             <p id="input-error"></p>
         </form>
         
-        <div>
+        <div class="toggle-container">
             <input type="checkbox" class="checkbox" id="checkbox">
             <label for="checkbox" class="label">
                 <div class='ball'> </div>
@@ -29,40 +37,53 @@
 
     </div>
 
-    <div id="weather-content">
-        <div id="weather-display">
-            <div id="city">
-                <p></p>
+    <div class="weather-content">
+        <div class="weather-display">
+            <div class="header">
+                <div id="city">
+                    <p></p>
+                </div>
+                <div id="weather">
+                    <p></p>
+                </div>
             </div>
-            <div id="weather">
-                <p></p>
+            <div class="main-content"> 
+                <div id="temp-now">
+                    <p></p>
+                </div>
+                <div id="units">
+                    <p></p>
+                </div>
+                <div id="weather-img">
+                    <img src="" alt="">
+                </div>
             </div>
-            <div id="weather-img">
-                <img src="" alt="">
-            </div>
-            <div id="temp-now">
-                <p></p>
-            </div>
-            <div id="units">
-                <p></p>
-            </div>
-            <div id="unit-switch">
-                <button id="unit-toggle">Switch Units</button>
-            </div>
+
             <div id="sub-info">
                 <div id="temp-feel">
+                    <h2>Feels like:</h2>
                     <p></p>
                 </div>
                 <div id="wind">
+                    <h2>Wind:</h2>
                     <p></p>
                 </div>
                 <div id="humidity">
+                    <h2>Humidity:</h2>
                     <p></p>
                 </div>
                 <div id="pressure">
+                    <h2>Pressure:</h2>
                     <p></p>
                 </div>
             </div>
+
+            <div id="unit-switch">
+                <button id="unit-toggle">Switch Units</button>
+            </div>
+
+
+
         </div>
     </div>
 
